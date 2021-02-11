@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FreshRSS YouTube to Clipboard
 // @namespace    com.jhvisser.rss
-// @version      1.0.1
+// @version      1.0.2
 // @description  Grabs a list of all the YouTube links on a FreshRSS page and saves them to clipboard.
 // @author       Fogest [freshrss@jhvisser.com]
 // @match        https://rss.jhvisser.com/i/*
