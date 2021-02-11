@@ -5,8 +5,8 @@
 // @description  Grabs a list of all the YouTube links on a FreshRSS page and saves them to clipboard.
 // @author       Fogest [freshrss@jhvisser.com]
 // @match        https://rss.jhvisser.com/i/*
-// @updateURL    https://g.jhvisser.com/chrome-extensions/freshrss-youtube-to-clipboard/-/raw/master/freshrss-youtube-clipboard.user.js
-// @downloadURL  https://g.jhvisser.com/chrome-extensions/freshrss-youtube-to-clipboard/-/raw/master/freshrss-youtube-clipboard.user.js
+// @updateURL    https://github.com/Fogest/FreshRSS-YouTube-to-Clipboard/raw/master/freshrss-youtube-clipboard.user.js
+// @downloadURL  https://github.com/Fogest/FreshRSS-YouTube-to-Clipboard/raw/master/freshrss-youtube-clipboard.user.js
 // ==/UserScript==
 
 (function() {
