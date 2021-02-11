@@ -1,10 +1,12 @@
 // ==UserScript==
 // @name         FreshRSS YouTube to Clipboard
 // @namespace    com.jhvisser.rss
-// @version      1.0.0
+// @version      1.0.1
 // @description  Grabs a list of all the YouTube links on a FreshRSS page and saves them to clipboard.
 // @author       Fogest [freshrss@jhvisser.com]
 // @match        https://rss.jhvisser.com/i/*
+// @updateURL    https://g.jhvisser.com/chrome-extensions/freshrss-youtube-to-clipboard/-/raw/master/freshrss-youtube-clipboard.user.js
+// @downloadURL  https://g.jhvisser.com/chrome-extensions/freshrss-youtube-to-clipboard/-/raw/master/freshrss-youtube-clipboard.user.js
 // ==/UserScript==
 
 (function() {
@@ -28,13 +30,16 @@
     }
 
     function getYouTubeLinks(element, e){
-        let youtubeLinks = "", links = document.links;
+        let youtubeLinks = new Set(), links = document.links;
         for(let i = 0; i < links.length; i++) {
-            if(links[i].href.includes("youtube")) {
-                youtubeLinks += links[i].href + "\n";
+            if(links[i].href.includes("youtube") && links[i].parentElement.nodeName == "LI") {
+                youtubeLinks.add(links[i].href);
             }
         }
-        copyToClipboard(youtubeLinks);
+        let txtForClipboardCopy = '';
+        for (let youtubeLink of youtubeLinks) txtForClipboardCopy += youtubeLink + '\n';
+        copyToClipboard(txtForClipboardCopy);
+        successMessage("Successfully copied to clipboard");
     }
 
     function copyToClipboard(text) {
@@ -48,6 +53,30 @@
         dummy.select();
         document.execCommand("copy");
         document.body.removeChild(dummy);
+    }
+
+    function successMessage(message) {
+        openNotification(message, 'good');
+    }
+
+    // Function taken from FreshRSS Javascript Code.
+    function openNotification(msg, status) {
+        if (notification_working === true) {
+            return false;
+        }
+        notification_working = true;
+        notification.querySelector('.msg').innerHTML = msg;
+        notification.className = 'notification';
+        notification.classList.add(status);
+
+        notification_interval = setTimeout(closeNotification, 4000);
+    }
+
+    // Function taken from FreshRSS Javascript Code.
+    function closeNotification() {
+        notification.classList.add('closed');
+        clearInterval(notification_interval);
+        notification_working = false;
     }
 
 })();
